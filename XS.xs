@@ -60,6 +60,12 @@ _overwrite (pTHX_ SV* path_sv, SV* content, mode_t mode) {
         (unsigned) rand(),
         getpid()
     );
+    if (len < 0) {
+        Safefree(temppath);
+
+        // This is serious enough that we can throw on it:
+        croak("Failed to create temp path??");
+    }
 
     int fd = open(temppath, O_WRONLY | O_CREAT | O_EXCL, mode);
     if (-1 == fd) {
@@ -108,8 +114,6 @@ _slurp (pTHX_ SV* path_sv) {
     }
 
     SV* ret;
-    char *buf;
-    int size;
 
     off_t initial_size = statbuf.st_size ? statbuf.st_size : STAT0_CHUNK_SIZE;
 
