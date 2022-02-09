@@ -4,7 +4,13 @@ File::Slurper::XS - Fast file slurping
 
 # SYNOPSIS
 
-    my $bytes = File::Slurper::XS::read_binary('/path/to/file');
+    my $bytes = File::Slurper::XS::read_binary('/path/to/file') // do {
+        die "Failed to read: $!";
+    };
+
+    File::Slurper::XS::overwrite_binary('/path/to/file', 'the content') or do {
+        die "Failed to overwrite: $!";
+    };
 
 # DESCRIPTION
 
@@ -32,11 +38,13 @@ Reads the file at $PATH and returns its contents as a byte string.
 This indicates failure the same way as Perl’s built-ins: undef is returned,
 and the error is in Perl’s `$!`.
 
-## overwrite\_binary( $PATH, $CONTENT )
+## overwrite\_binary( $PATH, $CONTENT \[, $MODE\] )
 
 Writes $CONTENT (a byte string) to a temporary file _alongside_ $PATH, then
 renames the temp file over the original. This clobbers any file that might
 already exist at $PATH.
+
+$MODE defaults to 0600.
 
 (Error handling works the same as with `read_binary()`.)
 
