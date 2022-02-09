@@ -9,7 +9,7 @@ our $VERSION;
 
 BEGIN {
     $VERSION = '0.01_01';
-    XSLoader::load();
+    XSLoader::load( __PACKAGE__, $VERSION );
 }
 
 =encoding utf-8
