@@ -84,6 +84,9 @@ store the old content B<and> $CONTENT.
 
 =back
 
+B<ADDITIONAL NOTE:> This function ignores SIGXFSZ on platforms where it
+exists.
+
 =cut
 
 sub _no_xfsz_overwrite_binary {
