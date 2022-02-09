@@ -87,6 +87,12 @@ store the old content B<and> $CONTENT.
 B<ADDITIONAL NOTE:> This function ignores SIGXFSZ on platforms where it
 exists.
 
+=head1 BENCHMARKS
+
+The smaller the file, the bigger the speed increase this module yields
+over pure-Perl slurping. The amount of increase will depend on your
+local system. See F<benchmark_slurp.pl> in the distribution.
+
 =cut
 
 sub _no_xfsz_overwrite_binary {

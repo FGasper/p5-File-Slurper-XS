@@ -1,0 +1,10 @@
+.gitignore
+MANIFEST
+Makefile.PL
+README.md
+XS.xs
+benchmark_slurp.pl
+lib/File/Slurper/XS.pm
+ppport.h
+t/read.t
+t/write.t
